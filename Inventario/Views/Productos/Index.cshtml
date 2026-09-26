@@ -1,0 +1,48 @@
+﻿@*  Comentarios
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model IEnumerable<Inventario.Models.Producto>
+
+@{
+    ViewData["Title"] = "Inventario";
+}
+
+<h1 class="mb-4">Inventario de Productos</h1>
+
+<table class="table table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Categoría</th>
+            <th class="text-end">Precio</th>
+            <th class="text-center">Stock</th>
+            <th class="text-center">Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var producto in Model)
+        {
+            <tr>
+                <td>@producto.Id</td>
+                <td>@producto.Nombre</td>
+                <td>@producto.Categoria</td>
+                <td class="text-end">@producto.Precio.ToString("C")</td>
+                <td class="text-center">@producto.Stock</td>
+                <td class="text-center">
+                    @if (producto.EsStockBajo)
+                    {
+                        <span class="badge bg-danger">Bajo</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-success">Suficiente</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p class="text-muted">Total de productos: @Model.Count()</p>
+
